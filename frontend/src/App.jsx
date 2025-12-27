@@ -19,6 +19,7 @@ function App() {
             <Route path="/apps" element={<AppsPage />} />
             <Route path="/workflows" element={<WorkflowsPage />} />
             <Route path="/workflows/new" element={<WorkflowBuilder />} />
+            <Route path="/workflows/create" element={<WorkflowBuilder />} />
             <Route path="/workflows/:id/edit" element={<WorkflowBuilder />} />
             <Route path="/history" element={<RunHistoryPage />} />
             <Route path="/analytics" element={<AnalyticsPage />} />
