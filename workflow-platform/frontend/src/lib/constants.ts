@@ -1,0 +1,250 @@
+// src/lib/constants.ts
+import { App } from './types';
+
+export const APP_DEFINITIONS: App[] = [
+  {
+    id: 'slack',
+    name: 'Slack',
+    description: 'Send messages and notifications to Slack channels',
+    icon: 'MessageSquare',
+    color: 'bg-purple-600',
+    linked: false,
+    needsSecret: false,
+    actions: [
+      {
+        id: 'send_message',
+        name: 'Send Message',
+        description: 'Post a message to a Slack channel',
+        fields: [
+          {
+            name: 'channel_id',
+            label: 'Channel ID',
+            type: 'text',
+            placeholder: 'C1234567890',
+            required: true,
+            description: 'The ID of the Slack channel (right-click channel > View details)',
+          },
+          {
+            name: 'message',
+            label: 'Message',
+            type: 'textarea',
+            placeholder: 'Enter your message. Use {{trigger.field}} for variables.',
+            required: true,
+            description: 'The message text. Supports variable substitution.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'notion',
+    name: 'Notion',
+    description: 'Create and update pages in your Notion workspace',
+    icon: 'Globe',
+    color: 'bg-gray-800',
+    linked: false,
+    needsSecret: false,
+    actions: [
+      {
+        id: 'create_page',
+        name: 'Create Page',
+        description: 'Create a new page in a Notion database',
+        fields: [
+          {
+            name: 'database_id',
+            label: 'Database ID',
+            type: 'text',
+            placeholder: 'abc123def456...',
+            required: true,
+            description: 'Found in the database URL',
+          },
+          {
+            name: 'title',
+            label: 'Page Title',
+            type: 'text',
+            placeholder: '{{trigger.title}}',
+            required: true,
+            description: 'The title of the new page',
+          },
+          {
+            name: 'content',
+            label: 'Content',
+            type: 'textarea',
+            placeholder: '{{trigger.description}}',
+            description: 'The page content (optional)',
+          },
+        ],
+      },
+      {
+        id: 'update_page',
+        name: 'Update Page',
+        description: 'Update an existing Notion page',
+        fields: [
+          {
+            name: 'page_id',
+            label: 'Page ID',
+            type: 'text',
+            placeholder: 'abc123...',
+            required: true,
+            description: 'The ID of the page to update',
+          },
+          {
+            name: 'title',
+            label: 'New Title',
+            type: 'text',
+            placeholder: 'Updated title',
+            required: true,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'trello',
+    name: 'Trello',
+    description: 'Create and manage Trello cards and boards',
+    icon: 'Mail',
+    color: 'bg-blue-600',
+    linked: false,
+    needsSecret: true,
+    actions: [
+      {
+        id: 'create_card',
+        name: 'Create Card',
+        description: 'Create a new card in a Trello list',
+        fields: [
+          {
+            name: 'list_id',
+            label: 'List ID',
+            type: 'text',
+            placeholder: '5e9a1b2c...',
+            required: true,
+            description: 'The ID of the Trello list',
+          },
+          {
+            name: 'name',
+            label: 'Card Name',
+            type: 'text',
+            placeholder: '{{trigger.title}}',
+            required: true,
+          },
+          {
+            name: 'description',
+            label: 'Description',
+            type: 'textarea',
+            placeholder: '{{trigger.description}}',
+            description: 'Card description (optional)',
+          },
+        ],
+      },
+      {
+        id: 'move_card',
+        name: 'Move Card',
+        description: 'Move a card to a different list',
+        fields: [
+          {
+            name: 'card_id',
+            label: 'Card ID',
+            type: 'text',
+            placeholder: '5f8a2b3c...',
+            required: true,
+          },
+          {
+            name: 'list_id',
+            label: 'Target List ID',
+            type: 'text',
+            placeholder: '5e9a1b2c...',
+            required: true,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'google_calendar',
+    name: 'Google Calendar',
+    description: 'Create and manage calendar events',
+    icon: 'Globe',
+    color: 'bg-red-600',
+    linked: false,
+    needsSecret: false,
+    actions: [
+      {
+        id: 'create_event',
+        name: 'Create Event',
+        description: 'Create a new calendar event',
+        fields: [
+          {
+            name: 'calendar_id',
+            label: 'Calendar ID',
+            type: 'text',
+            placeholder: 'primary',
+            required: true,
+            description: 'Use "primary" for your main calendar',
+          },
+          {
+            name: 'summary',
+            label: 'Event Title',
+            type: 'text',
+            placeholder: '{{trigger.title}}',
+            required: true,
+          },
+          {
+            name: 'start_time',
+            label: 'Start Time',
+            type: 'text',
+            placeholder: '2024-01-01T10:00:00Z',
+            required: true,
+            description: 'ISO 8601 format (UTC)',
+          },
+          {
+            name: 'end_time',
+            label: 'End Time',
+            type: 'text',
+            placeholder: '2024-01-01T11:00:00Z',
+            required: true,
+            description: 'ISO 8601 format (UTC)',
+          },
+          {
+            name: 'description',
+            label: 'Description',
+            type: 'textarea',
+            placeholder: '{{trigger.description}}',
+            description: 'Event description (optional)',
+          },
+        ],
+      },
+      {
+        id: 'list_events',
+        name: 'List Events',
+        description: 'Get upcoming calendar events',
+        fields: [
+          {
+            name: 'calendar_id',
+            label: 'Calendar ID',
+            type: 'text',
+            placeholder: 'primary',
+            required: true,
+          },
+          {
+            name: 'max_results',
+            label: 'Max Results',
+            type: 'number',
+            placeholder: '10',
+            description: 'Maximum number of events to return',
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export const ACTION_TYPE_MAP: Record<string, string> = {
+  'slack_send_message': 'Slack: Send Message',
+  'notion_create_page': 'Notion: Create Page',
+  'notion_update_page': 'Notion: Update Page',
+  'trello_create_card': 'Trello: Create Card',
+  'trello_move_card': 'Trello: Move Card',
+  'gcal_create_event': 'Google Calendar: Create Event',
+  'gcal_list_events': 'Google Calendar: List Events',
+};
